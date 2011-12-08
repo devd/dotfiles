@@ -1,0 +1,123 @@
+! fluxbox-update_configs added '(workspace=[current])' to (Next|Prev)(Window|Group)
+! check lines marked by 'FBCV13' if they are correctly updated
+!mouse actions added by fluxbox-update_configs
+OnTitlebar Mouse1 :MacroCmd {Focus} {Raise} {ActivateTab}
+!mouse actions added by fluxbox-update_configs
+OnTitlebar Move1 :StartMoving
+OnLeftGrip Move1 :StartResizing bottomleft
+OnRightGrip Move1 :StartResizing bottomright
+OnWindowBorder Move1 :StartMoving
+
+# click on the desktop to get menus
+OnDesktop Mouse1 :HideMenus
+OnDesktop Mouse2 :WorkspaceMenu
+OnDesktop Mouse3 :RootMenu
+
+Mouse6   :Exec xmessage "Button 6"
+Mouse7   :Exec xmessage "Button 7"
+Mouse8   :NextWindow {groups} (workspace=[current])
+Mouse9   :PrevWindow {groups} (workspace=[current])
+Mouse10   :ClientMenu
+Mouse13   :ToggleDecor
+
+Mod1 Tab :  !! FBCV13 !!
+Mod1 Shift Tab :PrevWindow {groups} (workspace=[current])  !! FBCV13 !!
+
+
+
+
+
+
+OnWindow Mod1 Mouse1 :MacroCmd {Raise} {Focus} {StartMoving}
+OnWindow Mod1 Mouse3 :MacroCmd {Raise} {Focus} {StartResizing NearestCorner}
+
+OnTitlebar Mouse2 :StartTabbing
+
+# double click on the titlebar to maximize
+OnTitlebar Double Mouse1 :Maximize
+
+# right click on the titlebar for a menu of options
+OnTitlebar Mouse3 :WindowMenu
+
+# alt-tab
+Mod1 Tab :NextWindow {groups} (workspace=[current])  !! FBCV13 !!
+Mod1 Shift Tab :PrevWindow {groups} (workspace=[current])  !! FBCV13 !!
+
+Mod4 Tab :SendToPrevHead
+
+Control Mod4 h         :MoveLeft 66
+Control Mod4 l         :MoveRight 66
+Control Mod4 k         :MoveUp 66
+Control Mod4 j         :MoveDown 66
+Shift Control Mod4 h   :MoveLeft 266
+Shift Control Mod4 l   :MoveRight 266
+Shift Control Mod4 k   :MoveUp 266
+Shift Control Mod4 j   :MoveDown 266
+Mod4 Mod1 h            :ResizeHorizontal -1
+Mod4 Mod1 l            :ResizeHorizontal  1
+Mod4 Mod1 k            :ResizeVertical  -1
+Mod4 Mod1 j            :ResizeVertical  1
+Shift Mod4 Mod1 h      :ResizeHorizontal -60
+Shift Mod4 Mod1 l      :ResizeHorizontal  60
+Shift Mod4 Mod1 k      :ResizeVertical  -60
+Shift Mod4 Mod1 j      :ResizeVertical  60
+Shift Mod4 h           :MoveTo 0 * Left
+Shift Mod4 l           :MoveTo 0 * Right
+Shift Mod4 k           :MoveTo * 0 Upper
+Shift Mod4 j           :MoveTo * 0 Lower
+
+# open a terminal
+Mod4 p :ExecCommand pidgin
+Mod4 d :ShowDesktop
+Mod4 t :If {Some Matches (xterm|byobu)} {NextWindow (xterm|byobu)} {Exec xterm -e byobu}
+Mod4 q :ExecCommand quodlibet
+Mod4 b :ExecCommand quodlibet --next
+Mod4 v :ExecCommand quodlibet --previous
+Mod4 c :ExecCommand quodlibet --pause
+Mod4 x :ExecCommand quodlibet --play
+Mod4 m :If {Some Matches (mail.google.com)} {NextWindow (mail.google.com)} {Exec google-chrome --user-data-dir=/home/devdatta/.config/chromium/gmail --app=https://mail.google.com/}
+Mod4 s :ExecCommand wmctrl -a kate || wmctrl -a kwrite || wmctrl -a gedit || /usr/bin/gedit
+Mod4 f :If {Some Matches (Navigator)} {NextWindow (Navigator)} {Exec pentadactyl}
+Mod4 g :If {Some Matches (Google-chrome)} {NextWindow (Google-chrome)} {Exec google-chrome --user-data-dir=/home/devdatta/.config/chromium/Default}
+Mod4 l :ExecCommand /home/devdatta/bin/bin/alock
+#while writing papers, I like Win E to open the PDF reader else open explorer.
+Mod4 e :ExecCommand wmctrl -a paper.pdf || pcmanfm
+# open a dialog to run programs
+Mod4 r :Exec fbrun
+Mod4 a   :ClientMenu
+Mod4 w   :ExecCommand /home/devdatta/bin/bin/quodnextsong 
+
+
+# volume settings, using common keycodes
+# if these don't work, use xev to find out your real keycodes
+XF86AudioRaiseVolume :Exec amixer sset Master,0 1+
+XF86AudioLowerVolume :Exec amixer sset Master,0 1-
+XF86AudioMute :Exec amixer sset Master,0 toggle
+
+#XF86AudioPlay :Exec audtool2 playback-playpause
+
+Mod4 XF86AudioRaiseVolume :Exec amixer sset PCM,0 1+
+Mod4 XF86AudioLowerVolume :Exec amixer sset PCM,0 1-
+
+#Mod4 b :Exec audtool2 playlist-advance
+#Mod4 v :Exec audtool2 playlist-reverse
+#Mod4 c:Exec audtool2 playback-playpause
+#Mod4 x:Exec audtool2 playback-playpause
+
+
+# current window commands
+Mod1 4 :Close
+Mod1 F9 :Minimize
+Mod1 3 :Maximize
+Mod1 F11 :ToggleDecor
+
+# open the window menu
+Mod1 space :WindowMenu
+
+#win + nums to switch workspaces
+Mod4 1 :Workspace 1
+Mod4 2 :Workspace 2
+Mod4 3 :Workspace 3
+Mod4 4 :Workspace 4
+
+
